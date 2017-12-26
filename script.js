@@ -19,11 +19,11 @@ function Car(x,y,w,h,color) {
 	this.dy = 0;
 	this.wheelAngle = 0;
 	this.rotation = 0;
+	this.rotationRate = 2; 
 	this.update = function() {
 
 		if(turnRPressed) {
-			// Calculate car rotation
-			this.rotation += 1;
+			this.rotation += this.rotationRate;
 			if(this.rotation > 360) {
 				this.rotation %= 360; 
 			}
@@ -32,8 +32,7 @@ function Car(x,y,w,h,color) {
 			}
 		}
 		else if(turnLPressed) {
-			// Calculate car rotation
-			this.rotation -= 1;
+			this.rotation -= this.rotationRate;
 			if(this.rotation > 360) {
 				this.rotation %= 360; 
 			}
@@ -77,18 +76,14 @@ function Car(x,y,w,h,color) {
 
 		c.translate(this.x+(this.w/2), this.y+(this.h/2));
 		c.rotate(this.rotation * Math.PI/180);
-		c.translate(-(this.x+(this.w/2)), -(this.y+(this.h/2)));
-		//c.translate(-(this.w/2), -(this.h/2));
-		//c.restore();		
+		c.translate(-(this.x+(this.w/2)), -(this.y+(this.h/2)));	
 
 		c.beginPath();
 		c.rect(this.x, this.y, this.w, this.h);
 		c.fillStyle = this.color;
 		c.fill();
 
-		//c.translate(-(this.x+(this.w/2)), -(this.y+(this.h/2)));
-		c.resetTransform();
-
+		//c.resetTransform();
 		c.restore();
 	};
 }
